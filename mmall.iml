@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4" />
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <dependency>web application context</dependency>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-datasource.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/main/webapp/WEB-INF/dispatcher-servlet.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+</module>
