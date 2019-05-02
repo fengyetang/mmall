@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmall.dao.TeamproductMapper">
+  <resultMap id="BaseResultMap" type="com.mmall.pojo.Teamproduct">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="subtitle" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="main_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sub_images" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="guid_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="guide_phone" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="start_time" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="start_place" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="backprice" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, price, category_id, name, subtitle, main_image, sub_images, detail, guid_name, 
+    guide_phone, start_time, start_place, backprice, stock, status, create_time, update_time
+  </sql>
+  <select id="selectByExample" parameterType="com.mmall.pojo.TeamproductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tourdis_teamproduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="com.mmall.pojo.TeamproductKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tourdis_teamproduct
+    where id = #{id,jdbcType=INTEGER}
+      and price = #{price,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.mmall.pojo.TeamproductKey">
+    delete from tourdis_teamproduct
+    where id = #{id,jdbcType=INTEGER}
+      and price = #{price,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mmall.pojo.TeamproductExample">
+    delete from tourdis_teamproduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.mmall.pojo.Teamproduct">
+    insert into tourdis_teamproduct (id, price, category_id, 
+      name, subtitle, main_image, 
+      sub_images, detail, guid_name, 
+      guide_phone, start_time, start_place, 
+      backprice, stock, status, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, #{categoryId,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{subtitle,jdbcType=VARCHAR}, #{mainImage,jdbcType=VARCHAR}, 
+      #{subImages,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{guidName,jdbcType=VARCHAR}, 
+      #{guidePhone,jdbcType=INTEGER}, #{startTime,jdbcType=DATE}, #{startPlace,jdbcType=VARCHAR}, 
+      #{backprice,jdbcType=DECIMAL}, #{stock,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mmall.pojo.Teamproduct">
+    insert into tourdis_teamproduct
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="subtitle != null">
+        subtitle,
+      </if>
+      <if test="mainImage != null">
+        main_image,
+      </if>
+      <if test="subImages != null">
+        sub_images,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="guidName != null">
+        guid_name,
+      </if>
+      <if test="guidePhone != null">
+        guide_phone,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="startPlace != null">
+        start_place,
+      </if>
+      <if test="backprice != null">
+        backprice,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImage != null">
+        #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="subImages != null">
+        #{subImages,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="guidName != null">
+        #{guidName,jdbcType=VARCHAR},
+      </if>
+      <if test="guidePhone != null">
+        #{guidePhone,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=DATE},
+      </if>
+      <if test="startPlace != null">
+        #{startPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="backprice != null">
+        #{backprice,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mmall.pojo.TeamproductExample" resultType="java.lang.Long">
+    select count(*) from tourdis_teamproduct
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tourdis_teamproduct
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subtitle != null">
+        subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainImage != null">
+        main_image = #{record.mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subImages != null">
+        sub_images = #{record.subImages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detail != null">
+        detail = #{record.detail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guidName != null">
+        guid_name = #{record.guidName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guidePhone != null">
+        guide_phone = #{record.guidePhone,jdbcType=INTEGER},
+      </if>
+      <if test="record.startTime != null">
+        start_time = #{record.startTime,jdbcType=DATE},
+      </if>
+      <if test="record.startPlace != null">
+        start_place = #{record.startPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backprice != null">
+        backprice = #{record.backprice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stock != null">
+        stock = #{record.stock,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tourdis_teamproduct
+    set id = #{record.id,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=DECIMAL},
+      category_id = #{record.categoryId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      subtitle = #{record.subtitle,jdbcType=VARCHAR},
+      main_image = #{record.mainImage,jdbcType=VARCHAR},
+      sub_images = #{record.subImages,jdbcType=VARCHAR},
+      detail = #{record.detail,jdbcType=VARCHAR},
+      guid_name = #{record.guidName,jdbcType=VARCHAR},
+      guide_phone = #{record.guidePhone,jdbcType=INTEGER},
+      start_time = #{record.startTime,jdbcType=DATE},
+      start_place = #{record.startPlace,jdbcType=VARCHAR},
+      backprice = #{record.backprice,jdbcType=DECIMAL},
+      stock = #{record.stock,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mmall.pojo.Teamproduct">
+    update tourdis_teamproduct
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImage != null">
+        main_image = #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="subImages != null">
+        sub_images = #{subImages,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="guidName != null">
+        guid_name = #{guidName,jdbcType=VARCHAR},
+      </if>
+      <if test="guidePhone != null">
+        guide_phone = #{guidePhone,jdbcType=INTEGER},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=DATE},
+      </if>
+      <if test="startPlace != null">
+        start_place = #{startPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="backprice != null">
+        backprice = #{backprice,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+      and price = #{price,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mmall.pojo.Teamproduct">
+    update tourdis_teamproduct
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      subtitle = #{subtitle,jdbcType=VARCHAR},
+      main_image = #{mainImage,jdbcType=VARCHAR},
+      sub_images = #{subImages,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      guid_name = #{guidName,jdbcType=VARCHAR},
+      guide_phone = #{guidePhone,jdbcType=INTEGER},
+      start_time = #{startTime,jdbcType=DATE},
+      start_place = #{startPlace,jdbcType=VARCHAR},
+      backprice = #{backprice,jdbcType=DECIMAL},
+      stock = #{stock,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+      and price = #{price,jdbcType=DECIMAL}
+  </update>
+</mapper>

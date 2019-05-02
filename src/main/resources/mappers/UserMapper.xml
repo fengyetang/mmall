@@ -3,7 +3,7 @@
 <mapper namespace="com.mmall.dao.UserMapper">
   <resultMap id="BaseResultMap" type="com.mmall.pojo.User">
     <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -82,7 +82,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from mmall_user
+    from tourdis_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,24 +90,34 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tourdis_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tourdis_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <delete id="deleteByExample" parameterType="com.mmall.pojo.UserExample">
-    delete from mmall_user
+    delete from tourdis_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.mmall.pojo.User">
-    insert into mmall_user (id, username, password, 
+    insert into tourdis_user (id, username, password, 
       email, phone, question, 
       answer, role, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, 
-      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),
-     now())
+      #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mmall.pojo.User">
-    insert into mmall_user
+    insert into tourdis_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -166,21 +176,21 @@
         #{role,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
-        now(),
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null">
-        now(),
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.mmall.pojo.UserExample" resultType="java.lang.Long">
-    select count(*) from mmall_user
+    select count(*) from tourdis_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update mmall_user
+    update tourdis_user
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -210,7 +220,7 @@
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.updateTime != null">
-        update_time = now(),
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null">
@@ -218,7 +228,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update mmall_user
+    update tourdis_user
     set id = #{record.id,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
@@ -228,9 +238,104 @@
       answer = #{record.answer,jdbcType=VARCHAR},
       role = #{record.role,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = now()
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mmall.pojo.User">
+    update tourdis_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null">
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mmall.pojo.User">
+    update tourdis_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      role = #{role,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="checkUsername" resultType="java.lang.Integer" parameterType="string">
+    select count(1) from tourdis_user
+    where username=#{username}
+  </select>
+  <select id="checkEmail" resultType="java.lang.Integer" parameterType="string">
+    select count(1) from tourdis_user
+    where email=#{email}
+  </select>
+  <select id="selectLogin" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from tourdis_user
+    where username=#{username}
+    and password=#{password}
+  </select>
+
+  <select id="selectQuestionByUsername" resultType="java.lang.String" parameterType="string">
+    select
+    question
+    from tourdis_user
+    where username=#{username}
+  </select>
+  <select id="checkAnswer" resultType="java.lang.Integer" parameterType="map">
+    select
+    count(1)
+    from tourdis_user
+        where username=#{username}
+        and question=#{question}
+        and answer=#{answer}
+        </select>
+  <update id="updatePasswordByUsername" parameterType="map">
+    update tourdis_user
+    set password=#{passwordNew},update_time=now()
+    where username=#{username}
+  </update>
+
+  <select id="checkPassword" resultType="java.lang.Integer" parameterType="map">
+    select
+    count(1)
+    from tourdis_user
+    where id=#{userId}
+    and password=#{password}
+  </select>
+  
+  <select id="checkEmailByUserId" resultType="java.lang.Integer" parameterType="map">
+    select count(1) from tourdis_user
+    where email=#{email}
+    and id!=#{userId}
+  </select>
 </mapper>

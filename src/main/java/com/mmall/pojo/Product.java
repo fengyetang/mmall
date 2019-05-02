@@ -20,6 +20,8 @@ public class Product {
 
     private BigDecimal price;
 
+    private BigDecimal backprice;
+
     private Integer stock;
 
     private Integer status;
@@ -28,7 +30,7 @@ public class Product {
 
     private Date updateTime;
 
-    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, Integer stock, Integer status, Date createTime, Date updateTime) {
+    public Product(Integer id, Integer categoryId, String name, String subtitle, String mainImage, String subImages, String detail, BigDecimal price, BigDecimal backprice, Integer stock, Integer status, Date createTime, Date updateTime) {
         this.id = id;
         this.categoryId = categoryId;
         this.name = name;
@@ -37,6 +39,7 @@ public class Product {
         this.subImages = subImages;
         this.detail = detail;
         this.price = price;
+        this.backprice = backprice;
         this.stock = stock;
         this.status = status;
         this.createTime = createTime;
@@ -109,6 +112,14 @@ public class Product {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public BigDecimal getBackprice() {
+        return backprice;
+    }
+
+    public void setBackprice(BigDecimal backprice) {
+        this.backprice = backprice;
     }
 
     public Integer getStock() {

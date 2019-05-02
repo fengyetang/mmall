@@ -5,6 +5,8 @@ import java.util.Date;
 public class Cart {
     private Integer id;
 
+    private Integer sharePersonId;
+
     private Integer userId;
 
     private Integer productId;
@@ -17,14 +19,23 @@ public class Cart {
 
     private Date updateTime;
 
-    public Cart(Integer id, Integer userId, Integer productId, Integer quantity, Integer checked, Date createTime, Date updateTime) {
+    public Cart(Integer id,Integer sharePersonId, Integer userId, Integer productId, Integer quantity, Integer checked, Date createTime, Date updateTime) {
         this.id = id;
+        this.sharePersonId=sharePersonId;
         this.userId = userId;
         this.productId = productId;
         this.quantity = quantity;
         this.checked = checked;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public Integer getSharePersonId() {
+        return sharePersonId;
+    }
+
+    public void setSharePersonId(Integer sharePersonId) {
+        this.sharePersonId = sharePersonId;
     }
 
     public Cart() {

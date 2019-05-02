@@ -8,6 +8,8 @@ public class OrderItem {
 
     private Integer userId;
 
+    private  Integer sharePersonId;
+
     private Long orderNo;
 
     private Integer productId;
@@ -16,7 +18,7 @@ public class OrderItem {
 
     private String productImage;
 
-    private BigDecimal currentUnitPrice;
+    private BigDecimal currentUnitPrice;//购买商品的单价
 
     private Integer quantity;
 
@@ -26,9 +28,10 @@ public class OrderItem {
 
     private Date updateTime;
 
-    public OrderItem(Integer id, Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Date createTime, Date updateTime) {
+    public OrderItem(Integer id,Integer sharePersonId ,Integer userId, Long orderNo, Integer productId, String productName, String productImage, BigDecimal currentUnitPrice, Integer quantity, BigDecimal totalPrice, Date createTime, Date updateTime) {
         this.id = id;
         this.userId = userId;
+        this.sharePersonId=sharePersonId;
         this.orderNo = orderNo;
         this.productId = productId;
         this.productName = productName;
@@ -38,6 +41,14 @@ public class OrderItem {
         this.totalPrice = totalPrice;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public Integer getSharePersonId() {
+        return sharePersonId;
+    }
+
+    public void setSharePersonId(Integer sharePersonId) {
+        this.sharePersonId = sharePersonId;
     }
 
     public OrderItem() {

@@ -3,6 +3,7 @@ package com.mmall.pojo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class OrderExample {
@@ -104,6 +105,32 @@ public class OrderExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value, String property) {
+            if (value == null) {
+                throw new RuntimeException("Value for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value.getTime()), property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
+            if (values == null || values.size() == 0) {
+                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+            }
+            List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
+            Iterator<Date> iter = values.iterator();
+            while (iter.hasNext()) {
+                dateList.add(new java.sql.Date(iter.next().getTime()));
+            }
+            addCriterion(condition, dateList, property);
+        }
+
+        protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
+            if (value1 == null || value2 == null) {
+                throw new RuntimeException("Between values for " + property + " cannot be null");
+            }
+            addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
         public Criteria andIdIsNull() {
@@ -466,63 +493,63 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andPostageIsNull() {
-            addCriterion("postage is null");
+        public Criteria andStartTimeIsNull() {
+            addCriterion("start_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andPostageIsNotNull() {
-            addCriterion("postage is not null");
+        public Criteria andStartTimeIsNotNull() {
+            addCriterion("start_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPostageEqualTo(Integer value) {
-            addCriterion("postage =", value, "postage");
+        public Criteria andStartTimeEqualTo(Date value) {
+            addCriterionForJDBCDate("start_time =", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageNotEqualTo(Integer value) {
-            addCriterion("postage <>", value, "postage");
+        public Criteria andStartTimeNotEqualTo(Date value) {
+            addCriterionForJDBCDate("start_time <>", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageGreaterThan(Integer value) {
-            addCriterion("postage >", value, "postage");
+        public Criteria andStartTimeGreaterThan(Date value) {
+            addCriterionForJDBCDate("start_time >", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageGreaterThanOrEqualTo(Integer value) {
-            addCriterion("postage >=", value, "postage");
+        public Criteria andStartTimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("start_time >=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageLessThan(Integer value) {
-            addCriterion("postage <", value, "postage");
+        public Criteria andStartTimeLessThan(Date value) {
+            addCriterionForJDBCDate("start_time <", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageLessThanOrEqualTo(Integer value) {
-            addCriterion("postage <=", value, "postage");
+        public Criteria andStartTimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("start_time <=", value, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageIn(List<Integer> values) {
-            addCriterion("postage in", values, "postage");
+        public Criteria andStartTimeIn(List<Date> values) {
+            addCriterionForJDBCDate("start_time in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageNotIn(List<Integer> values) {
-            addCriterion("postage not in", values, "postage");
+        public Criteria andStartTimeNotIn(List<Date> values) {
+            addCriterionForJDBCDate("start_time not in", values, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageBetween(Integer value1, Integer value2) {
-            addCriterion("postage between", value1, value2, "postage");
+        public Criteria andStartTimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("start_time between", value1, value2, "startTime");
             return (Criteria) this;
         }
 
-        public Criteria andPostageNotBetween(Integer value1, Integer value2) {
-            addCriterion("postage not between", value1, value2, "postage");
+        public Criteria andStartTimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("start_time not between", value1, value2, "startTime");
             return (Criteria) this;
         }
 
@@ -703,66 +730,6 @@ public class OrderExample {
 
         public Criteria andSendTimeNotBetween(Date value1, Date value2) {
             addCriterion("send_time not between", value1, value2, "sendTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeIsNull() {
-            addCriterion("end_time is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeIsNotNull() {
-            addCriterion("end_time is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeEqualTo(Date value) {
-            addCriterion("end_time =", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeNotEqualTo(Date value) {
-            addCriterion("end_time <>", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeGreaterThan(Date value) {
-            addCriterion("end_time >", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("end_time >=", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeLessThan(Date value) {
-            addCriterion("end_time <", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeLessThanOrEqualTo(Date value) {
-            addCriterion("end_time <=", value, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeIn(List<Date> values) {
-            addCriterion("end_time in", values, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeNotIn(List<Date> values) {
-            addCriterion("end_time not in", values, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeBetween(Date value1, Date value2) {
-            addCriterion("end_time between", value1, value2, "endTime");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndTimeNotBetween(Date value1, Date value2) {
-            addCriterion("end_time not between", value1, value2, "endTime");
             return (Criteria) this;
         }
 

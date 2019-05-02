@@ -25,6 +25,7 @@
                 connectionURL="${db.url}"
                 userId="${db.username}"
                 password="${db.password}">
+            <property name="useInformationSchema" value="true"></property>
         </jdbcConnection>
 
 
@@ -70,18 +71,22 @@
         </javaClientGenerator>
 
 
-        <table tableName="mmall_shipping" domainObjectName="Shipping" ></table>
-        <table tableName="mmall_cart" domainObjectName="Cart" ></table>
-        <table tableName="mmall_cart_item" domainObjectName="CartItem"></table>
-        <table tableName="mmall_category" domainObjectName="Category"></table>
-        <table tableName="mmall_order" domainObjectName="Order" ></table>
-        <table tableName="mmall_order_item" domainObjectName="OrderItem" ></table>
-        <table tableName="mmall_pay_info" domainObjectName="PayInfo"></table>
-        <table tableName="mmall_product" domainObjectName="Product">
+        <table tableName="tourdis_person" domainObjectName="Person" ></table>
+        <table tableName="tourdis_cart" domainObjectName="Cart" ></table>
+        <!--<table tableName="mmall_cart_item" domainObjectName="CartItem"></table>-->
+        <table tableName="tourdis_category" domainObjectName="Category"></table>
+        <table tableName="tourdis_order" domainObjectName="Order" ></table>
+        <table tableName="tourdis_order_item" domainObjectName="OrderItem" ></table>
+        <table tableName="tourdis_pay_info" domainObjectName="PayInfo"></table>
+        <table tableName="tourdis_product" domainObjectName="Product">
             <columnOverride column="detail" jdbcType="VARCHAR" />
             <columnOverride column="sub_images" jdbcType="VARCHAR" />
         </table>
-        <table tableName="mmall_user" domainObjectName="User" ></table>
+        <table tableName="tourdis_teamproduct" domainObjectName="Teamproduct">
+            <columnOverride column="detail" jdbcType="VARCHAR" />
+            <columnOverride column="sub_images" jdbcType="VARCHAR" />
+        </table>
+        <table tableName="tourdis_user" domainObjectName="User" ></table>
 
 
         <!-- geelynote mybatis插件的搭建 -->

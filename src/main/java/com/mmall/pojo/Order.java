@@ -6,17 +6,19 @@ import java.util.Date;
 public class Order {
     private Integer id;
 
+    private Integer sharePersonId;
+
     private Long orderNo;
 
     private Integer userId;
 
-    private Integer shippingId;
+    private Integer personId;
 
     private BigDecimal payment;
 
     private Integer paymentType;
 
-    private Integer postage;
+    private Date startTime;
 
     private Integer status;
 
@@ -24,29 +26,43 @@ public class Order {
 
     private Date sendTime;
 
-    private Date endTime;
-
     private Date closeTime;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Order(Integer id, Long orderNo, Integer userId, Integer shippingId, BigDecimal payment, Integer paymentType, Integer postage, Integer status, Date paymentTime, Date sendTime, Date endTime, Date closeTime, Date createTime, Date updateTime) {
+    public Order(Integer id,Integer sharePersonId, Long orderNo, Integer userId, Integer personId, BigDecimal payment, Integer paymentType, Date startTime, Integer status, Date paymentTime, Date sendTime, Date closeTime, Date createTime, Date updateTime) {
         this.id = id;
+        this.sharePersonId=sharePersonId;
         this.orderNo = orderNo;
         this.userId = userId;
-        this.shippingId = shippingId;
+        this.personId = personId;
         this.payment = payment;
         this.paymentType = paymentType;
-        this.postage = postage;
+        this.startTime = startTime;
         this.status = status;
         this.paymentTime = paymentTime;
         this.sendTime = sendTime;
-        this.endTime = endTime;
         this.closeTime = closeTime;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public Integer getSharePersonId() {
+        return sharePersonId;
+    }
+
+    public void setSharePersonId(Integer sharePersonId) {
+        this.sharePersonId = sharePersonId;
+    }
+
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public Order() {
@@ -77,12 +93,12 @@ public class Order {
         this.userId = userId;
     }
 
-    public Integer getShippingId() {
-        return shippingId;
+    public Integer getpersonId() {
+        return personId;
     }
 
-    public void setShippingId(Integer shippingId) {
-        this.shippingId = shippingId;
+    public void setpersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public BigDecimal getPayment() {
@@ -101,12 +117,12 @@ public class Order {
         this.paymentType = paymentType;
     }
 
-    public Integer getPostage() {
-        return postage;
+    public Date getStartTime() {
+        return startTime;
     }
 
-    public void setPostage(Integer postage) {
-        this.postage = postage;
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     public Integer getStatus() {
@@ -131,14 +147,6 @@ public class Order {
 
     public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
     }
 
     public Date getCloseTime() {
